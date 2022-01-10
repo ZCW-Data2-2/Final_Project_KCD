@@ -21,7 +21,7 @@ Phases that can overlap some:
 1 and 2
 3.a 3.b starting for 4
 
-##Algorithms Tested
+## Algorithms Tested
 ??? 80%
 
 Naive Bayes 75%
