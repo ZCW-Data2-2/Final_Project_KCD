@@ -3,7 +3,9 @@
 capstone project for ZCW Data's course.
 
 Application will run a query against Twitter using the Twitter API.
-![data pipeline](./images/Dataflow Final Project.png)
+
+![data pipeline](https://github.com/ZCW-Data2-2/Final_Project_KCD/blob/main/images/Dataflow%20Final%20Project.png)
+
 ([live document](https://docs.google.com/presentation/d/1pXJSsQBkr6xXI2dluPxIpyOxXZqf_O7f65USWllmJAk/edit?usp=sharing))
 
 [Project board link](https://github.com/ZCW-Data2-2/Final_Project_KCD/projects/1)
@@ -19,4 +21,7 @@ Phases that can overlap some:
 1 and 2
 3.a 3.b starting for 4
 
-##Algorithms Tested
+## Algorithms Tested
+??? 80%
+
+Naive Bayes 75%
