@@ -1,2 +1,7 @@
 venv
 .DS_Store
+twitter
+twittertraining.csv
+averaged_perceptron_tagger.pickle
+
+
