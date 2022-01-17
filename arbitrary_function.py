@@ -4,13 +4,15 @@ import numpy as np
 import pandas as pd
 #string
 from string import punctuation
+
+
 # plotting
 import seaborn as sns
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 # nltk
+
 import nltk
-nltk.download('all')
 from nltk.tag import PerceptronTagger
 from nltk.tag import pos_tag
 from nltk.corpus import stopwords
@@ -111,9 +113,8 @@ data = tokens
 
 
 #5.8 APPLY LEMMATIZER
-nltk.download('averaged_perceptron_tagger')
 
-tags = PerceptronTagger(data)
+tags = pos_tag(data)
 
 
 def _tag2type(tag):
@@ -126,8 +127,10 @@ def _tag2type(tag):
         return 'a'
 
 lemmatizer = WordNetLemmatizer()
-data = [[lemmatizer.lemmatize(word, _tag2type(tag)) for (word, tag) in t] for t in tags]
 
+# data = [[lemmatizer.lemmatize(word, _tag2type(tag)) for (word, tag) in t] for t in tags]
+
+data = [[lemmatizer.lemmatize(_tag2type(tag)) for (tag) in t] for t in tags]
 
 
 #5.9 SEPERATE INPUT FEATURE AND LABEL
