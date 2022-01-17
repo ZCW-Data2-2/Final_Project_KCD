@@ -138,6 +138,8 @@ data = [[lemmatizer.lemmatize(_tag2type(tag)) for (tag) in t] for t in tags]
 X=data.text
 Y=data.target
 
+#above, this is not working!
+
 
 type(X)
 type(Y)
