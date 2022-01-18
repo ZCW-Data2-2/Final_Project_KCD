@@ -1,3 +1,5 @@
+# pickle
+import pickle
 # utilities
 import re
 import numpy as np
@@ -109,12 +111,17 @@ tokens = tweet_tokenizer.tokenize(tweet)
 
 data = tokens
 
+print(data)
+
     
 
 
 #5.8 APPLY LEMMATIZER
 
 tags = pos_tag(data)
+
+
+print(tags)
 
 
 def _tag2type(tag):
@@ -128,53 +135,63 @@ def _tag2type(tag):
 
 lemmatizer = WordNetLemmatizer()
 
-# data = [[lemmatizer.lemmatize(word, _tag2type(tag)) for (word, tag) in t] for t in tags]
-
-data = [[lemmatizer.lemmatize(_tag2type(tag)) for (tag) in t] for t in tags]
 
 
-#5.9 SEPERATE INPUT FEATURE AND LABEL
+print(tags,'asjdhfksjdf',data)
 
-X=data.text
-Y=data.target
+# for t in tags:
+#     print(t)
+#     lemmatizer.lemmatize(t[0],_tag2type(t[1]))
+#     print(t)
 
-#above, this is not working!
+        
+
+data = [lemmatizer.lemmatize(t[0], _tag2type(t[1])) for t in tags] 
 
 
-type(X)
-type(Y)
 
-data_pos=data[data['target']==1]
-data_neg=data[data['target']==0]
+# #5.9 SEPERATE INPUT FEATURE AND LABEL
+# print(data)
+# X=data.text
+# Y=data.target
 
-data_neg
+# #above, this is not working!
 
-pos_tweets=data_pos['text'].values
-neg_tweets=data_pos['text'].values
 
-plt.figured(figsize = (20,20))
-wc = WordCloud(max_words = 1000 , width = 1600 , height = 800,
-            collocations=False).generate(str(neg_tweets))
+# type(X)
+# type(Y)
 
-plt.figure(figsize = (20,20))
-wc = WordCloud(max_words = 1000 , width = 1600 , height = 800,
-            collocations=False).generate(str(pos_tweets))
-plt.imshow(wc)
-plt.title('Word Cloud for Positive tweets')
+# data_pos=data[data['target']==1]
+# data_neg=data[data['target']==0]
 
-#5.9 SEPERATE INPUT FEATURE AND LABEL
+# data_neg
 
-def get_all_words(tokens_list):
+# pos_tweets=data_pos['text'].values
+# neg_tweets=data_pos['text'].values
+
+# plt.figured(figsize = (20,20))
+# wc = WordCloud(max_words = 1000 , width = 1600 , height = 800,
+#             collocations=False).generate(str(neg_tweets))
+
+# plt.figure(figsize = (20,20))
+# wc = WordCloud(max_words = 1000 , width = 1600 , height = 800,
+#             collocations=False).generate(str(pos_tweets))
+# plt.imshow(wc)
+# plt.title('Word Cloud for Positive tweets')
+
+# #5.9 SEPERATE INPUT FEATURE AND LABEL
+
+# def get_all_words(tokens_list):
     
-    for tokens in tokens_list:
-        for token in tokens:
-            yield token
+#     for tokens in tokens_list:
+#         for token in tokens:
+#             yield token
 
-all_pos_words = get_all_words(pos_tweets)
-all_neg_words = get_all_words(neg_tweets)
+# all_pos_words = get_all_words(pos_tweets)
+# all_neg_words = get_all_words(neg_tweets)
 
-freq_dist_pos = FreqDist(all_pos_words)
-freq_dist_neg = FreqDist(all_neg_words)
+# freq_dist_pos = FreqDist(all_pos_words)
+# freq_dist_neg = FreqDist(all_neg_words)
 
 #7.1 TRANSFORMING DATASET USING TF-IDF VECTORIZER
 
