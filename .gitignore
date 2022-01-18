@@ -1,5 +1,16 @@
 venv
 .DS_Store
+twitter
+twittertraining.csv
+averaged_perceptron_tagger.pickle
+
+
+
+datasets
+finalprojvenv
+practice
+notes.md
+training.csv
 env
 secret_notes
 .env
@@ -7,3 +18,5 @@ secret_notes
 __pycache__
 
 kafka_stuff/.confluent/
+glove
+
