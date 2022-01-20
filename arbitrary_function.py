@@ -2,33 +2,24 @@
 import pickle
 # utilities
 import re
-import numpy as np
-import pandas as pd
-#string
+# string
 from string import punctuation
-
-
-# plotting
-import seaborn as sns
-from wordcloud import WordCloud
-import matplotlib.pyplot as plt
 # nltk
-
-import nltk
-from nltk.tag import PerceptronTagger
 from nltk.tag import pos_tag
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import TweetTokenizer
-# sklearn
-from sklearn.svm import LinearSVC
-from sklearn.naive_bayes import BernoulliNB
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics import confusion_matrix, classification_report
 
-data = 'sad sad sad sad sad'
+file = open('./ML model building/LRmodel.pickle', 'rb')
+info = pickle.load(file)
+file.close()
+
+file2 = open('ML model building/vectoriser.pickle', 'rb')
+info2 = pickle.load(file2)
+file2.close()
+
+
+data = 'i hate driving with no shoes on'
 
 def get_text(data):
 
@@ -83,16 +74,9 @@ tokens = tweet_tokenizer.tokenize(tweet)
 
 data = tokens
 
-print(data)
-
-    
-
-#5.8 APPLY LEMMATIZER
 
 tags = pos_tag(data)
 
-
-print(tags)
 
 
 def _tag2type(tag):
@@ -108,57 +92,17 @@ lemmatizer = WordNetLemmatizer()
 
 
 
-print(tags,'asjdhfksjdf',data)
-
-
-
-        
-
 data = [lemmatizer.lemmatize(t[0], _tag2type(t[1])) for t in tags] 
 
+data = ' '.join(data)
 
-print(data)
+data = [data]
 
-# X = data
-
-
-# X_train, X_test, y_train, y_test = train_test_split(X,test_size = 0.1, random_state =50)
-
-#7.1 TRANSFORMING DATASET USING TF-IDF VECTORIZER
-
-
-
-vectoriser = TfidfVectorizer(ngram_range=(1,2), max_features=500000)
-# vectoriser.fit(' '.join(data))
-vectoriser.fit(data)
-
-print('yooooo')
-
-
-
-#7.2 TRANSFORM THE DATA USING TF-IDF VECTORIZER
-
-#data = vectoriser.transform(' '.join(data))
-data = vectoriser.transform(data)
-
-print(data)
-
-file = open('/Users/naickercreason/dev/Final_Project_KCD/ML model building/LRmodel.pickle', 'rb')
-
-info = pickle.load(file)
-
-file.close()
-
-
-# data = np.array(data)
-
-# data.reshape(-1,1)
+data = info2.transform(data)
 
 print(info.predict(data))
 
 
-# X_train = vectoriser.transform(X_train.apply(lambda x: ' '.join(x)))
-# X_test  = vectoriser.transform(X_test.apply(lambda x: ' '.join(x)))
 
 
 
