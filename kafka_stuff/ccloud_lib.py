@@ -123,11 +123,11 @@ def parse_args():
     required.add_argument('-f',
                           dest="config_file",
                           help="path to Confluent Cloud configuration file",
-                          required=True)
+                          required=False)
     required.add_argument('-t',
                           dest="topic",
                           help="topic name",
-                          required=True)
+                          required=False)
     args = parser.parse_args()
 
     return args

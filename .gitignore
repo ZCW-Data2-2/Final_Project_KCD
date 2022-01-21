@@ -20,3 +20,8 @@ __pycache__
 kafka_stuff/.confluent/
 glove
 
+/kafka_stuff/additional.config
+/kafka_stuff/vectorizer.pickle
+/kafka_stuff/tweets_tagged.csv
+/kafka_stuff/LRmodel.pickle
+/kafka_stuff/df_tagged.pkl

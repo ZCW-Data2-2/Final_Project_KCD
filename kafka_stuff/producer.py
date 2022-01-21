@@ -22,6 +22,8 @@
 #
 # =============================================================================
 
+
+
 from confluent_kafka import Producer, KafkaError
 import json
 import ccloud_lib
@@ -31,8 +33,8 @@ if __name__ == '__main__':
 
     # Read arguments and configurations and initialize
     args = ccloud_lib.parse_args()
-    config_file = args.config_file
-    topic = args.topic
+    config_file = "./.confluent/python.config"
+    topic = "tweets"
     conf = ccloud_lib.read_ccloud_config(config_file)
 
     # Create Producer instance
