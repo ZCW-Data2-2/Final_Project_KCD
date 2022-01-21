@@ -1,8 +1,13 @@
 # Tweet Sentiment Analysis
 ## Sentiment on Mask Mandates
-capstone project for ZCW Data's course.
+Capstone project for ZCW Data's course.
 
-Application will run a query against Twitter using the Twitter API.
+This group consists of
+Keerthi Balla: https://github.com/ZCW-Data2-2/Final_Project_KCD/tree/keerthiballa
+Drake Dwornik: https://github.com/ZCW-Data2-2/Final_Project_KCD/tree/drake
+Creasen Naicker: https://github.com/ZCW-Data2-2/Final_Project_KCD/tree/creasen
+
+This application will run a query against Twitter using the Twitter API. We are using the search topic "Mask Mandate" for our analysis. From there it will utilize Apache Kafka and be sent to a producer. From the producer it will make the queries and send messages to the database as well as a kafka Topic. From there the tweet will be sent to a Kafka consumer where the trained model (logistic regression) will take one tweet and determine whether its positive, negative, or neutral. From there the tweet will be sent to the stored database. From the database it will be sent to a data visualization tool.
 
 ![data pipeline](https://github.com/ZCW-Data2-2/Final_Project_KCD/blob/main/images/Dataflow%20Final%20Project.png)
 
