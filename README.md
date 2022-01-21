@@ -18,18 +18,14 @@ This application will run a query against Twitter using the Twitter API. We are 
 
 [Project board link](https://github.com/ZCW-Data2-2/Final_Project_KCD/projects/1)
 
-Phases of project:
-phase 1: develop alanalysis models using Machine Learning
-phase 2: deploy Kafka
-Phase 3.a: deployconsumer
-Phase 3.b: deploy Kafka consumer
-phase 4: Develop a way to present results
 
-Phases that can overlap some:
-1 and 2
-3.a 3.b starting for 4
 
 ## Algorithms Tested
-??? 80%
+1. Logistic Regression
 
-Naive Bayes 75%
+2. Bernoulli Naive Bayes
+
+3. Support Vector Machine
+
+4. XGBoost
+
