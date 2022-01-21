@@ -3,7 +3,7 @@ venv
 twitter
 twittertraining.csv
 averaged_perceptron_tagger.pickle
-
+python.config
 
 
 datasets
@@ -13,4 +13,4 @@ notes.md
 training.csv
 env
 glove
-
+python.config

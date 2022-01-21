@@ -20,16 +20,16 @@ file2.close()
 
 
 data = 'i hate driving with no shoes on'
-
+#####
 def get_text(data):
 
     data=data.lower()
     
-
+######
 
 #5.2 REMOVE STOP WORDS
 def cleaning_URLs(data):
-    return re.sub('((www.[^s]+)|(http?://[^s]+)|(https?://[^s]+))','',data)
+    return re.sub('(www.[^\s]+)|(http?://[^\s]+)|(https?://[^\s]+)','',data)
 data=cleaning_URLs(data)
 
 
