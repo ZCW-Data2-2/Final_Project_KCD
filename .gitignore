@@ -25,3 +25,7 @@ glove
 /kafka_stuff/tweets_tagged.csv
 /kafka_stuff/LRmodel.pickle
 /kafka_stuff/df_tagged.pkl
+secrets.py
+secrets.py
+kafka_stuff/secrets.py
+/kafka_stuff/secrets.py
