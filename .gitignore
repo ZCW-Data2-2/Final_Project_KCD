@@ -3,8 +3,8 @@ venv
 twitter
 twittertraining.csv
 averaged_perceptron_tagger.pickle
-
-
+python.config
+secrets.py
 
 datasets
 finalprojvenv
@@ -19,4 +19,4 @@ __pycache__
 
 kafka_stuff/.confluent/
 glove
-
+python.config
