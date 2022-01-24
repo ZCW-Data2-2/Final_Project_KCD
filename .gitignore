@@ -4,7 +4,7 @@ twitter
 twittertraining.csv
 averaged_perceptron_tagger.pickle
 python.config
-
+secrets.py
 
 datasets
 finalprojvenv
@@ -12,5 +12,11 @@ practice
 notes.md
 training.csv
 env
+secret_notes
+.env
+.idea
+__pycache__
+
+kafka_stuff/.confluent/
 glove
 python.config

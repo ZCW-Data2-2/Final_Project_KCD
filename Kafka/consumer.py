@@ -27,6 +27,9 @@ import json
 import ccloud_lib
 import pickle
 import re
+import numpy as np
+
+from secrets import retrieve_secrets
 
 from string import punctuation
 
@@ -34,18 +37,85 @@ from nltk.tag import pos_tag
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import TweetTokenizer
+import psycopg2
 
-# file = open('ML model building/LRmodel.pickle', 'rb')
-# info = pickle.load(file)
-# file.close()
 
-# file2 = open('ML model building/vectoriser.pickle', 'rb')
-# info2 = pickle.load(file2)
-# file2.close()
 
+
+
+def tag2type(tag):
+
+    if tag.startswith('NN'):
+        return 'n'
+    elif tag.startswith('VB'):
+        return 'v'
+    else:
+        return 'a'
+
+
+stopwords1 = stopwords.words('english')
+punctuations_list = punctuation
+
+
+def cleaning_URLs(data):
+    return re.sub('(www.[^\s]+)|(http?://[^\s]+)|(https?://[^\s]+)', '', data)
+
+
+def clean_text(data, stopwords1, punctuations_list):
+
+    data = data.lower()
+
+    data = cleaning_URLs(data)
+
+    data = " ".join([word for word in str(
+        data).split() if word not in stopwords1])
+
+    translator = str.maketrans('', '', punctuations_list)
+    data = data.translate(translator)
+    data = re.sub('[0-9]+', '', data)
+    tweet_tokenizer = TweetTokenizer(
+        preserve_case=True,
+        reduce_len=False,
+        strip_handles=False)
+
+    tweet = data
+
+    tokens = tweet_tokenizer.tokenize(tweet)
+
+    data = tokens
+
+    tags = pos_tag(data)
+    lemmatizer = WordNetLemmatizer()
+
+    data = [lemmatizer.lemmatize(t[0], tag2type(t[1])) for t in tags]
+
+    data = ' '.join(data)
+
+    data = [data]
+
+
+    return data
 
 
 if __name__ == '__main__':
+
+
+    secrets = retrieve_secrets()
+
+    connection = psycopg2.connect(user="postgres",
+                                    password=secrets['postgres_password'],
+                                    host="tweets-sentiment.cwbdzmao4m7w.us-east-1.rds.amazonaws.com",
+                                    port="5432",
+                                    database="tweets_sentiment_db")
+
+
+    file = open('/Users/naickercreason/dev/Final_Project_KCD/ML model building/LRmodel.pickle', 'rb')
+    info = pickle.load(file)
+    file.close()
+
+    file2 = open('/Users/naickercreason/dev/Final_Project_KCD/ML model building/vectoriser.pickle', 'rb')
+    info2 = pickle.load(file2)
+    file2.close()
 
     # Read arguments and configurations and initialize
     # args = ccloud_lib.parse_args()
@@ -80,15 +150,23 @@ if __name__ == '__main__':
                 print('error: {}'.format(msg.error()))
             else:
                 # Check for Kafka message
-                record_key = msg.key()
                 record_value = msg.value()
-                data = json.loads(record_value)#dictionary will be id & tweet
-                count = data['count']
-                total_count += count
-  
-                print("Consumed record with key {} and value {}, \
-                      and updated total count to {}"
-                      .format(record_key, record_value, total_count))
+                # dictionary will be id & tweet
+                data = json.loads(record_value)
+                text = clean_text(data['text'], stopwords1, punctuations_list)               
+                text = info2.transform(text)
+                prediction = info.predict(text)
+                prediction = int(prediction[0])
+                print(f"The sentiment for ID:{data['id']} is {prediction}")
+                cursor = connection.cursor()
+                sql_query = """
+                    UPDATE tweets SET sentiment = %s WHERE id = %s 
+                """
+                cursor.execute(sql_query, (prediction, data['id']))
+                connection.commit()
+                # print(type(prediction))
+                # print(type(data['id']))
+
     except KeyboardInterrupt:
         pass
     finally:
