@@ -78,5 +78,5 @@ if __name__ == '__main__':
 
 
 
-    while True:
-        params = make_request(url, params, headers, producer)
+    # while True:
+    params = make_request(url, params, headers, producer)
