@@ -28,3 +28,5 @@ secrets.py
 /kafka_stuff/secrets.py
 
 python.config
+vectoriser.pickle
+
